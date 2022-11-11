@@ -1,0 +1,45 @@
+.bloginfo {
+    padding: 20px 50px;
+    .title {
+        font-size: 50px;
+        text-shadow: 2px 2px 4px #000000;
+        text-decoration: none;
+        a {
+            color: #004413;
+            &:hover {
+                color: #002b0c;
+            }
+        }
+    }
+    .description {
+        margin: 10px;
+        color: #555555;
+    }
+}
+
+.nav {
+    .menu-menu-chinh-container {
+        // padding: 10px 40px;
+        background-color: #004413;
+        #menu-menu-chinh {
+            display: flex;
+            .menu-item {
+                padding: 10px 15px;
+                color: #fff ;
+                font-weight: 700;
+                transition: all linear 0.2s;
+                padding: 10px 40px;
+                line-height: 40px;
+                &:hover {
+                    cursor: pointer;
+                    color: rgb(208, 208, 208);
+                    background-color: #002b0c;
+                }
+
+            }
+        }
+    }
+    .sub-menu {
+        display: none;
+    }
+}
