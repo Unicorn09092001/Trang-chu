@@ -63,9 +63,50 @@
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 5px;
+            &:hover {
+                cursor: pointer;
+                color: #002b0c;
+            }
+        }
+        .public-time {
+            color: #666666;
+            &:hover {
+                cursor: pointer;
+                color: #002b0c;
+            }
         }
         .dis-content {
             margin: 16px 0;
+        }
+    }
+    .story-topic {
+        color: #00370f;
+    }
+    .btn-change-page-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .btn-change-page {
+            padding: 10px 20px;
+            background-color: #002b0c;
+            color: #fff;
+            &:hover {
+                cursor: pointer;
+                background-color: #00370f;
+            }
+        }
+        .page-list {
+            display: flex;
+            .btn-change-page {
+                margin-right: 15px;
+            }
+        }
+        .active {
+            background-color: #005618;
+            &:hover {
+                cursor: default;
+                background-color: #005618;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 import React from "react";
+
 import "./bodyContent.scss";
+import { Outlet } from "react-router-dom";
 
 function BodyContent() {
   return (
@@ -24,42 +26,7 @@ function BodyContent() {
       </div>
 
       <div className="content-center-wrapper">
-        <div className="story-wrapper">
-          <div className="story-title">
-            Những câu đố mẹo vui có đáp án – Phần 2
-          </div>
-          <div className="public-time">Tháng Tư 12, 2022</div>
-          <div className="dis-content">
-            Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay. Đây
-            là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1 Câu đố
-            30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội Liên Hiệp
-            Phụ Nữ. Câu đố 31: […]
-          </div>
-        </div>
-        <div className="story-wrapper">
-          <div className="story-title">
-            Những câu đố mẹo vui có đáp án – Phần 2
-          </div>
-          <div className="public-time">Tháng Tư 12, 2022</div>
-          <div className="dis-content">
-            Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay. Đây
-            là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1 Câu đố
-            30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội Liên Hiệp
-            Phụ Nữ. Câu đố 31: […]
-          </div>
-        </div>
-        <div className="story-wrapper">
-          <div className="story-title">
-            Những câu đố mẹo vui có đáp án – Phần 2
-          </div>
-          <div className="public-time">Tháng Tư 12, 2022</div>
-          <div className="dis-content">
-            Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay. Đây
-            là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1 Câu đố
-            30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội Liên Hiệp
-            Phụ Nữ. Câu đố 31: […]
-          </div>
-        </div>
+        <Outlet />
       </div>
       <div className="content-right-wrapper">
         <h3>Danh mục truyện cười</h3>

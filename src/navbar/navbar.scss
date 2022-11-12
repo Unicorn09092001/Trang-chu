@@ -30,16 +30,44 @@
                 transition: all linear 0.2s;
                 padding: 10px 40px;
                 line-height: 40px;
+                position: relative;
                 &:hover {
                     cursor: pointer;
                     color: rgb(208, 208, 208);
                     background-color: #002b0c;
                 }
-
             }
         }
     }
     .sub-menu {
-        display: none;
+        position: absolute;
+        background-color: #004413;     
+        left: 0;
+        top: 100%;
+        width: 130%;
+        height: 60vh;
+        overflow-y: scroll;
+        .menu-item {
+            padding: 10px 15px;
+            color: #fff ;
+            font-weight: 700;
+            transition: all linear 0.2s;
+            padding: 10px 40px;
+            line-height: 40px;
+            position: relative;
+           
+            &:hover {
+                cursor: pointer;
+                color: rgb(208, 208, 208);
+                background-color: #002b0c;
+            }
+        }
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #002b0c;
+            border-radius: 9999px;
+        }
     }
 }

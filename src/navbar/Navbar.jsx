@@ -1,16 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import "./navbar.scss";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setShouldViewStoryContent } from "../Slice/currentStory";
 
 function Navbar() {
+  const dispatch = useDispatch();
   const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
+
   return (
     <div className="header">
       <div className="bloginfo">
         <div className="title">
           <span>
-            <a href="/">TRUYỆN CƯỜI HAY</a>
+            <NavLink to={"/"}>TRUYỆN CƯỜI HAY</NavLink>
           </span>
         </div>
         <div className="description">
@@ -21,208 +25,178 @@ function Navbar() {
         <div className="items">
           <div className="menu-menu-chinh-container">
             <ul id="menu-menu-chinh" className="menu">
-              <li
+              <NavLink
+                to={"/truyen-cuoi-voca"}
                 id="menu-item-7497"
                 className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7497"
+                onClick={() => {
+                  dispatch(setShouldViewStoryContent(false));
+                  setIsOpenSubMenu(false);
+                }}
               >
                 Truyện cười vova
-              </li>
-              <li
+              </NavLink>
+              <NavLink
+                to={"/truyen-cuoi-tinh-yeu"}
                 id="menu-item-7496"
                 className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7496"
+                onClick={() => setIsOpenSubMenu(false)}
               >
                 Truyện cười tình yêu
-              </li>
-              <li
+              </NavLink>
+              <NavLink
+                to={"/truyen-cuoi-18"}
                 id="menu-item-7495"
                 className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7495"
+                onClick={() => setIsOpenSubMenu(false)}
               >
                 Truyện cười 18
-              </li>
+              </NavLink>
               <li
                 id="menu-item-7508"
                 className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-7508"
+                onClick={() => {
+                  setIsOpenSubMenu(!isOpenSubMenu);
+                }}
               >
                 Truyện cười khác
-                <KeyboardArrowRightIcon />
-                <ul className="sub-menu">
-                  <li
-                    id="menu-item-7499"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7499"
-                  >
-                    <a href="https://truyencuoihay.vn/tho-ca-cuoi">
+                {isOpenSubMenu && (
+                  <ul className="sub-menu">
+                    <NavLink
+                      to={"/Tho-ca-cuoi"}
+                      id="menu-item-7499"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7499"
+                    >
                       Thơ ca cười
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7498"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7498"
-                  >
-                    <a href="https://truyencuoihay.vn/tay-du-ky-che">
+                    </NavLink>
+                    <li
+                      id="menu-item-7498"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7498"
+                    >
                       Tây du ký chế
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7501"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7501"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-cong-nghe">
+                    </li>
+                    <li
+                      id="menu-item-7501"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7501"
+                    >
                       Truyện cười công nghệ
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7502"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7502"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-cong-so">
+                    </li>
+                    <li
+                      id="menu-item-7502"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7502"
+                    >
                       Truyện cười công sở
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7503"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7503"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-dan-gian">
+                    </li>
+                    <li
+                      id="menu-item-7503"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7503"
+                    >
                       Truyện cười dân gian
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7504"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7504"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-danh-nhan">
+                    </li>
+                    <li
+                      id="menu-item-7504"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7504"
+                    >
                       Truyện cười danh nhân
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7505"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7505"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-gia-dinh">
+                    </li>
+                    <li
+                      id="menu-item-7505"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7505"
+                    >
                       Truyện cười gia đình
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7506"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7506"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-giao-thong">
+                    </li>
+                    <li
+                      id="menu-item-7506"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7506"
+                    >
                       Truyện cười giao thông
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7507"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7507"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-hoc-sinh">
+                    </li>
+                    <li
+                      id="menu-item-7507"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7507"
+                    >
                       Truyện cười học sinh
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7509"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7509"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-khoa-hoc">
+                    </li>
+                    <li
+                      id="menu-item-7509"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7509"
+                    >
                       Truyện cười khoa học
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7510"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7510"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-ngan">
+                    </li>
+                    <li
+                      id="menu-item-7510"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7510"
+                    >
                       Truyện cười ngắn
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7511"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7511"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-nha-binh">
+                    </li>
+                    <li
+                      id="menu-item-7511"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7511"
+                    >
                       Truyện cười nhà binh
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7512"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7512"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-nha-hang">
+                    </li>
+                    <li
+                      id="menu-item-7512"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7512"
+                    >
                       Truyện cười nhà hàng
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7514"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7514"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-phap-luat">
+                    </li>
+                    <li
+                      id="menu-item-7514"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7514"
+                    >
                       Truyện cười pháp luật
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7515"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7515"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-say-xin">
+                    </li>
+                    <li
+                      id="menu-item-7515"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7515"
+                    >
                       Truyện cười say xỉn
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7516"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7516"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-tam-quoc">
+                    </li>
+                    <li
+                      id="menu-item-7516"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7516"
+                    >
                       Truyện cười tam quốc
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7517"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7517"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-the-gioi">
+                    </li>
+                    <li
+                      id="menu-item-7517"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7517"
+                    >
                       Truyện cười thế giới
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7518"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7518"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-the-thao">
+                    </li>
+                    <li
+                      id="menu-item-7518"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7518"
+                    >
                       Truyện cười thể thao
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7520"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7520"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-ton-giao">
+                    </li>
+                    <li
+                      id="menu-item-7520"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7520"
+                    >
                       Truyện cười tôn giáo
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7522"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7522"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-cuoi-y-hoc">
+                    </li>
+                    <li
+                      id="menu-item-7522"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7522"
+                    >
                       Truyện cười y học
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7523"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7523"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-tieu-lam">
+                    </li>
+                    <li
+                      id="menu-item-7523"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7523"
+                    >
                       Truyện tiếu lâm
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-7524"
-                    className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7524"
-                  >
-                    <a href="https://truyencuoihay.vn/truyen-trang-quynh">
+                    </li>
+                    <li
+                      id="menu-item-7524"
+                      className="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7524"
+                    >
                       Truyện trạng Quỳnh
-                    </a>
-                  </li>
-                </ul>
+                    </li>
+                  </ul>
+                )}
               </li>
             </ul>
           </div>
