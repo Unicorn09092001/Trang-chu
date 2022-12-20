@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setShouldViewStoryContent } from "../Slice/currentStory";
+import { setShouldViewStoryContent, setCurrentStory } from "../Slice/currentStory";
+import { searchByPage } from "./../service/services";
+import { setCurrentStoryList, setIsHomePage } from "../Slice/currentStoryList";
 
-function StoryByTopic() {
+function StoryByTopic({ topic }) {
   const dispatch = useDispatch();
   const { shouldViewStoryContent } = useSelector((state) => state.currentStory);
+  const { currentStoryList } = useSelector((state) => state.currentStoryList);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(10);
   const [pageList, setPageList] = useState([1, 2, 3]);
+
 
   useEffect(() => {
     setLastPage(20);
@@ -36,83 +40,30 @@ function StoryByTopic() {
       <Outlet />
       {!shouldViewStoryContent && (
         <>
-          <h1 className="story-topic">Danh Mục: truyen cuoi voca</h1>
-          <div className="story-wrapper">
-            <NavLink
-              to={"bai1"}
-              onClick={() => dispatch(setShouldViewStoryContent(true))}
-              className="story-title"
-            >
-              Bưu cục thó mất rồi
-            </NavLink>
-            <div className="public-time">Tháng Tư 11, 2022</div>
-            <div className="dis-content">
-              Ở bưu cục nọ, có một lá thư đề người nhận là Thượng đế, Thiên
-              đường. Dĩ nhiên là không thể gửi nó đi, họ bèn mở ra xem, thư
-              viết: – “Gửi Thượng đế! Tôi là một bà lão tội nghiệp 80 tuổi. Suốt
-              cả đời, tôi chẳng đòi hỏi gì. Nhưng hiện nay […]
-            </div>
-          </div>
-          <div className="story-wrapper">
-            <div className="story-title">
-              Những câu đố mẹo vui có đáp án – Phần 2
-            </div>
-            <div className="public-time">Tháng Tư 12, 2022</div>
-            <div className="dis-content">
-              Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay.
-              Đây là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1
-              Câu đố 30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội
-              Liên Hiệp Phụ Nữ. Câu đố 31: […]
-            </div>
-          </div>
-          <div className="story-wrapper">
-            <div className="story-title">
-              Những câu đố mẹo vui có đáp án – Phần 2
-            </div>
-            <div className="public-time">Tháng Tư 12, 2022</div>
-            <div className="dis-content">
-              Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay.
-              Đây là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1
-              Câu đố 30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội
-              Liên Hiệp Phụ Nữ. Câu đố 31: […]
-            </div>
-          </div>
-          <div className="story-wrapper">
-            <div className="story-title">
-              Những câu đố mẹo vui có đáp án – Phần 2
-            </div>
-            <div className="public-time">Tháng Tư 12, 2022</div>
-            <div className="dis-content">
-              Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay.
-              Đây là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1
-              Câu đố 30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội
-              Liên Hiệp Phụ Nữ. Câu đố 31: […]
-            </div>
-          </div>
-          <div className="story-wrapper">
-            <div className="story-title">
-              Những câu đố mẹo vui có đáp án – Phần 2
-            </div>
-            <div className="public-time">Tháng Tư 12, 2022</div>
-            <div className="dis-content">
-              Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay.
-              Đây là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1
-              Câu đố 30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội
-              Liên Hiệp Phụ Nữ. Câu đố 31: […]
-            </div>
-          </div>
-          <div className="story-wrapper">
-            <div className="story-title">
-              Những câu đố mẹo vui có đáp án – Phần 2
-            </div>
-            <div className="public-time">Tháng Tư 12, 2022</div>
-            <div className="dis-content">
-              Mời các bạn tiếp tục xem những câu đố vui mẹo có đáp án cực hay.
-              Đây là phần tiếp theo của Những câu đố mẹo vui có đáp án – phần 1
-              Câu đố 30: Cơ quan quan trọng nhất của phụ nữ là gì ? Đáp án: Hội
-              Liên Hiệp Phụ Nữ. Câu đố 31: […]
-            </div>
-          </div>
+          {topic !== "home" ? <h1 className="story-topic">{topic}</h1> : ""}
+          {currentStoryList?.data?.map((item, index) => {
+            return (
+              <div className="story-wrapper" key={index}>
+                <NavLink
+                  to={`story/id=${item?.id}`}
+                  onClick={() => {
+                    dispatch(setShouldViewStoryContent(true));
+                    dispatch(setCurrentStory(item));
+                  }}
+                  className="story-title"
+                >
+                  {item?.name}
+                </NavLink>
+                <div className="public-time">Tháng Tư 11, 2022</div>
+                <div className="dis-content">
+                  Ở bưu cục nọ, có một lá thư đề người nhận là Thượng đế, Thiên
+                  đường. Dĩ nhiên là không thể gửi nó đi, họ bèn mở ra xem, thư
+                  viết: – “Gửi Thượng đế! Tôi là một bà lão tội nghiệp 80 tuổi.
+                  Suốt cả đời, tôi chẳng đòi hỏi gì. Nhưng hiện nay […]
+                </div>
+              </div>
+            );
+          })}
           <div className="btn-change-page-wrapper">
             <div
               className="btn-change-page"

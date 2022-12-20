@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./bodyContent.scss";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+import StoryByTopic from "../component/StoryByTopic";
+import StoryContent from "../component/StoryContent";
 
-function BodyContent() {
+function BodyContent({ storyList }) {
+  const { currentStory } = useSelector(state => state.currentStory);
+
+  console.log(currentStory)
+
   return (
     <div className="container">
       <div className="content-left-wrapper">
@@ -24,8 +32,35 @@ function BodyContent() {
           <div className="story-item">Chung thủy</div>
         </div>
       </div>
-
       <div className="content-center-wrapper">
+        <Routes>
+          <Route
+            path="/"
+            element={<StoryByTopic storyList={storyList} topic={"home"} />}
+          >
+            <Route path={`story/id=${currentStory.id}`} element={<StoryContent story={currentStory}/>}/>
+          </Route>
+          <Route
+            path="truyen-cuoi-voca/"
+            element={<StoryByTopic topic={"Danh Mục: truyện cười voca"} />}
+          >
+            <Route path={`story/id=${currentStory.id}`} element={<StoryContent story={currentStory}/>}/>
+          </Route>
+          <Route
+            path="truyen-cuoi-tinh-yeu"
+            element={
+              <h1 className="story-topic">Danh Mục: truyen cuoi tinh yeu</h1>
+            }
+          />
+          <Route
+            path="truyen-cuoi-18"
+            element={<h1 className="story-topic">Danh Mục: truyen-cuoi-18</h1>}
+          />
+          <Route
+            path="Tho-ca-cuoi"
+            element={<h1 className="story-topic">Danh Mục: Tho-ca-cuoi</h1>}
+          />
+        </Routes>
         <Outlet />
       </div>
       <div className="content-right-wrapper">

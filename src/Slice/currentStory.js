@@ -3,18 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const currentStorySlice = createSlice({
   name: "currentStory",
   initialState: {
-    title: "",
-    author: "",
-    publicTime: "",
-    content: "",
+    currentStory: {},
     shouldViewStoryContent: false,
   },
   reducers: {
     setCurrentStory: (state, action) => {
-      state.title = action.payload.title;
-      state.author = action.payload.author;
-      state.publicTime = action.payload.publicTime;
-      state.content = action.payload.content;
+      state.currentStory = action.payload;
     },
     setShouldViewStoryContent: (state, action) => {
       state.shouldViewStoryContent = action.payload;
