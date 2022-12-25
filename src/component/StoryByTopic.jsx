@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setShouldViewStoryContent, setCurrentStory } from "../Slice/currentStory";
+import {
+  setShouldViewStoryContent,
+  setCurrentStory,
+} from "../Slice/currentStory";
 import { searchByPage } from "./../service/services";
 import { setCurrentStoryList, setIsHomePage } from "../Slice/currentStoryList";
+import moment from "moment/moment";
 
 function StoryByTopic({ topic }) {
   const dispatch = useDispatch();
   const { shouldViewStoryContent } = useSelector((state) => state.currentStory);
-  const { currentStoryList } = useSelector((state) => state.currentStoryList);
+  const { currentStoryList, pageTotal } = useSelector(
+    (state) => state.currentStoryList
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [lastPage, setLastPage] = useState(10);
+  const [lastPage, setLastPage] = useState(pageTotal);
   const [pageList, setPageList] = useState([1, 2, 3]);
 
-
   useEffect(() => {
-    setLastPage(20);
-  }, []);
+    searchByPage(currentPage).then(({ data }) => {
+      dispatch(setCurrentStoryList([...data.data]));
+    });
+    setLastPage(pageTotal);
+  }, [currentPage, dispatch, pageTotal]);
 
   const handleChangePage = (pageNew) => {
     if (pageNew > 0 && pageNew <= lastPage) {
@@ -41,25 +49,27 @@ function StoryByTopic({ topic }) {
       {!shouldViewStoryContent && (
         <>
           {topic !== "home" ? <h1 className="story-topic">{topic}</h1> : ""}
-          {currentStoryList?.data?.map((item, index) => {
+          {currentStoryList?.map((story, index) => {
             return (
               <div className="story-wrapper" key={index}>
                 <NavLink
-                  to={`story/id=${item?.id}`}
+                  to={`story/id=${story?.id}`}
                   onClick={() => {
                     dispatch(setShouldViewStoryContent(true));
-                    dispatch(setCurrentStory(item));
+                    dispatch(setCurrentStory(story));
                   }}
                   className="story-title"
                 >
-                  {item?.name}
+                  {story?.story_name}
                 </NavLink>
-                <div className="public-time">Tháng Tư 11, 2022</div>
+                <div className="public-time">
+                  {moment(story?.created).format("DD/MM/YYYY")}
+                </div>
                 <div className="dis-content">
-                  Ở bưu cục nọ, có một lá thư đề người nhận là Thượng đế, Thiên
-                  đường. Dĩ nhiên là không thể gửi nó đi, họ bèn mở ra xem, thư
-                  viết: – “Gửi Thượng đế! Tôi là một bà lão tội nghiệp 80 tuổi.
-                  Suốt cả đời, tôi chẳng đòi hỏi gì. Nhưng hiện nay […]
+                  {story?.content
+                    .replaceAll("<p>", "")
+                    .replaceAll("</p>", "")
+                    .replaceAll("<br/>", "")}
                 </div>
               </div>
             );
